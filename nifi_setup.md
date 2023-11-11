@@ -98,3 +98,5 @@ cd nifi-1.15.3/bin
 ```
 
 Finally we can run NiFi with GUI: http://34.118.106.96:8080/nifi/
+
+The template with whole flow generated can be found in *nifi.xml* file.
