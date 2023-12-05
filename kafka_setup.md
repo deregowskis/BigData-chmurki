@@ -47,3 +47,16 @@ Finally in new terminal we can create topics:
 bin/kafka-topics.sh --create --topic weather-nifi --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
 bin/kafka-topics.sh --create --topic warsaw-nifi --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
 ```
+
+Lists kafka topics:
+
+```
+bin/kafka-topics.sh --bootstrap-server=localhost:9092 --list
+```
+
+Run Zookeeper and Kafka as deamons
+
+```
+nohup bin/zookeeper-server-start.sh config/zookeeper.properties &
+nohup bin/kafka-server-start.sh config/server.properties &
+```
