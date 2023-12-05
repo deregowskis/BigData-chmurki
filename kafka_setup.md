@@ -60,3 +60,11 @@ Run Zookeeper and Kafka as deamons
 nohup bin/zookeeper-server-start.sh config/zookeeper.properties &
 nohup bin/kafka-server-start.sh config/server.properties &
 ```
+
+Setup retention policy to topic (24h)
+
+```
+bin/kafka-configs.sh --bootstrap-server  localhost:9092 --alter --entity-type topics --entity-name weather-nifi --add-config retention.ms=86400000
+bin/kafka-configs.sh --bootstrap-server  localhost:9092 --alter --entity-type topics --entity-name warsaw-nifi --add-config retention.ms=86400000
+```
+
