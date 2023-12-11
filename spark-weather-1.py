@@ -13,15 +13,15 @@ spark = SparkSession \
     .config("spark.sql.shuffle.partitions", 4) \
     .master("local[*]") \
     .getOrCreate()
-#df = spark \
-#  .readStream \
-#  .format("kafka") \
-#  .option("kafka.bootstrap.servers", "10.186.0.3:9092") \
-#  .option("startingOffsets", "earliest") \
-#  .option("subscribe", "weather-nifi") \
-#  .option("includeHeaders", "false") \
-#  .load()
-#df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
+df = spark \
+  .readStream \
+  .format("kafka") \
+  .option("kafka.bootstrap.servers", "10.186.0.3:9092") \
+  .option("startingOffsets", "earliest") \
+  .option("subscribe", "weather-nifi") \
+  .option("includeHeaders", "false") \
+  .load()
+df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
 
 json_schema = StructType([
     StructField("lat", StringType(), True),
@@ -50,7 +50,7 @@ json_schema = StructType([
 ])
 
 json_df = df.selectExpr("cast(value as string) as value")
-#json_expanded_df = json_df.withColumn("value", from_json(json_df["value"], json_schema)).select("value.*") 
+json_expanded_df = json_df.withColumn("value", from_json(json_df["value"], json_schema)).select("value.*") 
 
 json_df.printSchema()
 
